@@ -1,5 +1,3 @@
-// backend/index.js
-
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -14,8 +12,17 @@ dotenv.config();
 // Middleware
 app.use(express.json({ limit: "10mb" }));
 
-// ✅ CORS FIX (TEST MODE - OPEN FOR ALL)
-app.use(cors({ origin: "*" }));
+// ✅ CORS FIX (PRODUCTION READY)
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:5173",
+      "https://full-stack-wed.vercel.app"
+    ],
+    credentials: true
+  })
+);
 
 // MongoDB Connection
 mongoose
